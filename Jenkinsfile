@@ -29,7 +29,7 @@ pipeline {
         failure {
             echo 'I failed :('
         }
-        ABORTED {
+        aborted {
             echo 'USER STOPPED ME :@'
         }
     }
