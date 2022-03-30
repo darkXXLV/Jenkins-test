@@ -30,7 +30,12 @@ pipeline {
             echo 'I failed :('
         }
         aborted {
-            echo 'USER STOPPED ME :@'
+            sh '''
+            
+            git checkout feature2
+            git revert 4d2e69cf571fe25957cef4245d32bd8b8859d0db -m 1
+            git push origin feature2
+            '''
         }
     }
 }
