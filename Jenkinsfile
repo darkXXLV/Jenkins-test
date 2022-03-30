@@ -6,7 +6,7 @@ pipeline {
                 input('Do you want to proceed?')
                     }
                 }
-         }      
+               
          stage('Upload to AWS') {
               steps {
                   withAWS(region:'eu-west-1',credentials:'aws_creds') {
@@ -14,8 +14,10 @@ pipeline {
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'put-here')
                   }
               }
-         }
+         } 
      }
+}
+
      post {
 
         success {
@@ -31,4 +33,4 @@ pipeline {
             echo 'USER STOPPED ME :@'
         }
     }
-}
+
