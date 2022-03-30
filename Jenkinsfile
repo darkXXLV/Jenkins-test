@@ -1,14 +1,11 @@
 pipeline {
      agent any
      stages {
-         stage('Build') {
-             steps {
-                 sh 'echo "TEST"'
-                 sh '''
-                     echo "Multiline shell steps works too"
-                     ls -lah
-                 '''
-             }
+         stage('Input') {
+            steps {
+                input('Do you want to proceed?')
+                    }
+                }
          }      
          stage('Upload to AWS') {
               steps {
@@ -19,4 +16,20 @@ pipeline {
               }
          }
      }
+     post {
+
+        success {
+            echo 'I succeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        ABORTED {
+            echo 'USER STOPPED ME :@'
+        }
+    }
+}
 }
