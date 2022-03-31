@@ -31,7 +31,8 @@ pipeline {
         }
         aborted {
             sh '''
-            
+            git branch -D reverted-main
+            git branch -D reverted-main
             git checkout -b reverted-main
             git revert HEAD~1
             git push origin reverted-main
