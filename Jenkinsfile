@@ -30,13 +30,17 @@ pipeline {
             echo 'I failed :('
         }
         aborted {
+
+ 
             sh '''
-            git branch -D reverted-main
-            git branch -D reverted-main
-            git checkout -b reverted-main
-            git revert HEAD~1
-            git push origin reverted-main
-            
+            git checkout main
+            git pull origin main
+            git branch reverted-main HEAD~1
+            git checkout reverted-main first-stack.yaml
+            git add .
+            git commit -m "this should work"
+            git branch -d reverted-main
+            git push 
             '''
         }
     }
