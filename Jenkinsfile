@@ -30,14 +30,8 @@ pipeline {
             echo 'I failed :('
         }
         aborted {
-            // sh '''
-            
-            // git checkout -b reverted-main
-            // git revert HEAD~1
-            // git push origin reverted-main
-            // git branch -D reverted-main
-            
-            // '''
+
+ 
             sh '''
             git checkout main
             git pull origin main
