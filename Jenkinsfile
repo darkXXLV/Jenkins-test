@@ -23,25 +23,21 @@ pipeline {
         success {
             echo 'I succeeded!'
         }
-        unstable {
-            echo 'I am unstable :/'
-        }
-        failure {
-            echo 'I failed :('
-        }
         aborted {
-
+            withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'Default')]){
+               sh '''
+                git checkout main
+                git pull origin main
+                git branch reverted-main HEAD~1
+                git checkout reverted-main first-stack.yaml
+                git add .
+                git commit -m "this should work"
+                git branch -d reverted-main
+                git push 
+                ''' 
+            }
  
-            sh '''
-            git checkout main
-            git pull origin main
-            git branch reverted-main HEAD~1
-            git checkout reverted-main first-stack.yaml
-            git add .
-            git commit -m "this should work"
-            git branch -d reverted-main
-            git push 
-            '''
+            
         }
     }
 }
