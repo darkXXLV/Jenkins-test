@@ -26,7 +26,7 @@ pipeline {
         aborted {
             withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'Default')]){
                sh '''
-                
+                git branch -D reverted-main
                 git checkout main
                 git pull origin main
                 git checkout -b reverted-main
@@ -34,7 +34,7 @@ pipeline {
                 git checkout main
                 git merge reverted-main
                 git push origin main
-                git branch -D reverted-main
+                
                 ''' 
             }
  
