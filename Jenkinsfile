@@ -34,7 +34,6 @@ pipeline {
                 git checkout main
                 git merge reverted-main
                 git push origin main
-                
                 ''' 
             }
  
