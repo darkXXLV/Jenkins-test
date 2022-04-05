@@ -28,9 +28,7 @@ pipeline {
                sh '''
                 
                 git checkout main
-                git config pull.ff only 
                 git pull origin main
-                
                 git checkout -b reverted-main
                 git revert -m 1 HEAD
                 git checkout main
