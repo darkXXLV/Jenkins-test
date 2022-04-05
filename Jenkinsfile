@@ -28,11 +28,12 @@ pipeline {
                sh '''
                 git pull origin main
                 git checkout main
-                git checkout -D reverted-main
+                git checkout -b reverted-main
                 git revert -m 1 HEAD
                 git checkout main
                 git merge -s reverted-main
                 git push origin main
+                git branch -D reverted-main
                 ''' 
             }
  
