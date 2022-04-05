@@ -27,12 +27,12 @@ pipeline {
             withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'Default')]){
                sh '''
                 git branch -D reverted-main
-                git checkout main
                 git pull origin main
+                git checkout main
                 git checkout -D reverted-main
                 git revert -m 1 HEAD
                 git checkout main
-                git merge reverted-main
+                git merge -s reverted-main
                 git push origin main
                 ''' 
             }
