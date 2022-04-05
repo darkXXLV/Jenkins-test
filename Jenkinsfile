@@ -29,12 +29,11 @@ pipeline {
                 git branch -d reverted-main
                 git checkout main
                 git pull origin main
-                git branch reverted-main HEAD~1
-                git checkout reverted-main first-stack.yaml
-                git add .
-                git commit -m "this should work"
-                git branch -d reverted-main
-                git push 
+                git checkout -b reverted-main
+                git revert -m 1 HEAD
+                git checkout main
+                git merge reverted-main
+                git push origin main
                 ''' 
             }
  
