@@ -32,7 +32,7 @@ pipeline {
                 git checkout -b reverted-main
                 git revert -m 1 HEAD
                 git checkout main
-                git merge -s ours reverted-main
+                git merge reverted-main
                 git push origin main
                 git branch -D reverted-main
                 ''' 
