@@ -6,7 +6,8 @@ Description: CF template to create the first security group
 Parameters:
   OwnerName:
     Type: String
-    Description: Enter your name (no spaces)
+    Default: kristaps
+    Description: Kristaps
 
   InstanceTypeParameter:
     Type: String
