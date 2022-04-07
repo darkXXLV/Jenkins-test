@@ -25,7 +25,7 @@ pipeline {
          stage('Update stack'){
              steps{
                  withAWS(region:'eu-west-1',credentials:'aws_creds') {
-                    sh 'aws cloudformation update-stack --stack-name Jenkins --template-url https://put-here.s3.eu-west-1.amazonaws.com/first-stack.yaml'
+                    cfnUpdate(stack: 'Jenkins', url: 'https://put-here.s3.eu-west-1.amazonaws.com/first-stack.yaml')
                  }
              }
          }
