@@ -9,13 +9,18 @@ pipeline {
                
          stage('Upload to AWS') {
               steps {
-                  sh'''
-                  git pull origin main
-                  '''
+                  withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'Default')]){
+                      sh'''
+                      git pull origin main
+                      '''
+                  }
                   withAWS(region:'eu-west-1',credentials:'aws_creds') {
                   sh 'echo "Uploading content with AWS creds"'
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'put-here')
                   }
+                  sh'''
+                  aws cloudformation update-stack --stack-name Jenkins --template-url https://put-here.s3.eu-west-1.amazonaws.com/first-stack.yaml
+                  '''
               }
          } 
      }
@@ -35,7 +40,7 @@ pipeline {
                 git checkout -b reverted-main
                 git revert -m 1 HEAD
                 git checkout main
-                git merge -s ours reverted-main
+                git merge reverted-main
                 git push origin main
                 ''' 
             }
