@@ -82,6 +82,7 @@ Resources:
             sudo systemctl start jenkins
             sudo systemctl enable jenkins
             sudo yum install git
+            sudo yum update -y
 
 
 Outputs:
